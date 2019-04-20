@@ -1,0 +1,29 @@
+.end {
+    text-align:right;
+}
+
+#endtext {
+    padding-right:32px;
+}
+
+#expenses {
+    margin-top: 50px;
+}
+
+.tablecomponent {
+    padding-bottom:25px;
+}
+
+.top {
+    padding-top:50px;
+}
+
+#summary {
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:25px;
+}
+
+.namecol {
+    width:200px;
+}

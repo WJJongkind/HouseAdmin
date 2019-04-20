@@ -1,0 +1,34 @@
+<div class='maincontent' id='main'>
+  <table>
+    <tr>
+      <td colspan="2">
+        Name:
+        <br>
+        <input type="text" id="name" name="name" value="{{group.name}}">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        Description:
+        <br>
+        <input type="text" id="description" name="description" value="{{group.description}}">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        Change admin (NO UNDO):
+        <br>
+        <select id="admin" name="admin" value="{{group.admin}}">
+          <option *ngFor="let member of group.members" value="{{member}}">{{member}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button (click)="cancel();" id="cancel">Cancel</button>
+        <button (click)="update();" id="create">Save</button>
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" id="id" name="id" value="{{group.id}}">
+</div>

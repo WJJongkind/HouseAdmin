@@ -1,0 +1,36 @@
+table, tr, td, th {
+    font-family:verdana;
+    font-size:17px;
+    border: 2px solid #282828;
+    border-collapse:collapse;
+    text-align:start;
+    padding:6px;
+    color:#383838;
+    background: #969696
+}
+
+.groupName {
+    min-width:250px;
+}
+
+.description {
+    font-size:14px;
+    min-width:400px;
+    max-width:400px;
+}
+
+.precontent {
+    border-bottom-width:4px;
+}
+
+.title {
+    font-size: 22px;
+}
+
+.smallIconButton {
+    margin-left:5px;
+}
+
+a {
+    overflow-wrap: break-word;
+}

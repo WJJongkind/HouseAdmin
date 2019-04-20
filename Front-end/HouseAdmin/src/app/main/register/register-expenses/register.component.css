@@ -1,0 +1,75 @@
+select {
+    background-color:#383838;
+
+    border-style:solid;
+    border-color:#969696;
+
+    font-weight:bold;
+    font-family:verdana;
+    color: white;
+    width:235px;
+}
+
+option {
+    font-family:verdana;
+    color:white;
+}
+
+table {
+    align-items: flex-start
+}
+
+tr, td {
+    padding-bottom: 15px;
+}
+
+input {
+    width:230px;
+}
+
+textarea {
+    width:230px;
+}
+
+.newButton {
+    margin-left:9px;
+}
+
+.submit {
+    text-align:center;
+}
+
+#submit {
+    font-size:20px;
+    margin-top:15px;
+    margin-bottom:px;
+}
+
+.maincontent {
+    margin-bottom:30px;
+}
+
+.top {
+    padding-top:0px;
+    padding-bottom:0px;
+    max-width:25%;
+    width:25%;
+    min-width:25%;
+}
+
+.end {
+    text-align:right;
+    padding-top:0px;
+}
+
+#endtext {
+    padding-right:32px;
+}
+
+#startDate, #endDate {
+    width:auto;
+}
+
+#filters {
+    margin-top:75px;
+}

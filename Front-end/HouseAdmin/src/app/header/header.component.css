@@ -1,0 +1,39 @@
+h1 {
+    font-family:verdana;
+    width:100%;
+    background-color: #383838;
+    border-bottom-width:3px;
+    border-top-width:3px;
+    border-top-style:solid;
+    border-bottom-style:solid;
+    border-color:#515151;
+    text-align:center;
+    color:#969696;
+    margin-bottom:0px;
+}
+
+#logobox {
+    min-width:250px;
+    width:250px;
+    max-width:250px;
+}
+
+#spacer {
+    color: #383838;
+}
+
+tr, td {
+    margin-left:0px;
+    margin-right:0px;
+    padding-left:0px;
+    padding-right:0px;
+    border-width:0px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+#title {
+    width:100%
+}

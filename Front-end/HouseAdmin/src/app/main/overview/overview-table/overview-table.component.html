@@ -1,0 +1,29 @@
+<table>
+  <tr class="precontent">
+    <th class="title" colspan=3>
+      {{name}}
+    </th>
+  </tr>
+  <tr *ngFor="let category of categories">
+    <td class="rowtitle">
+      {{category.category}}
+    </td>
+    <td>
+      <div class="eur">€</div>{{category.amount.toFixed(2)}}
+    </td>
+    <td>
+      {{category.percentage < 100 ? category.percentage.toFixed(2) : category.percentage.toFixed(0)}}%
+    </td>
+  </tr>
+  <tr id='totals'>
+    <td class="rowtitle">
+      Total: 
+    </td>
+    <td>
+      <div class="eur">€</div>{{money.toFixed(2)}}
+    </td>
+    <td>  
+      100%
+    </td>
+  </tr>
+</table>

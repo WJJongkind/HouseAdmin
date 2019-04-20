@@ -1,0 +1,31 @@
+<table>
+  <tr>
+    <th colspan=3 class="title">
+      Groups
+    </th>
+  </tr>
+  <tr class="precontent">
+    <th>
+      Group
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Actions
+    </th>
+  </tr>
+  <tr *ngFor="let group of groups">
+      <td class="groupName">
+        <a href (click)="setActiveGroup(group.id)" [routerLink]="['', {outlets: {primary: 'main', mainrouter: ['overview']}}]">{{group.name}}</a>
+      </td>
+      <td class="description">
+        <a href (click)="setActiveGroup(group.id)" [routerLink]="['', {outlets: {primary: 'main', mainrouter: ['overview']}}]">{{group.description}}</a>
+      </td>
+    <td>
+      <a href [routerLink]="'../editgroup/' + group.id"><img class="smallIconButton" src="../../../assets/EditDark.png"></a>
+      <a href [routerLink]="'../managegroup/' + group.id"><img class="smallIconButton" src="../../../assets/AddUserDark.png"></a>
+      <img (click)="delete(group.id)" class="smallIconButton" src="../../../assets/DeleteDark.png">
+    </td>
+  </tr>
+</table>

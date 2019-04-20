@@ -1,0 +1,15 @@
+#main {
+    align-content: center;    
+    width:100%;
+    height:100%;
+    position:absolute;
+}
+
+#logout {
+    margin-top:15px;
+}
+
+#create {
+    margin-bottom:5px;
+    margin-right:5px;
+}

@@ -1,0 +1,25 @@
+#main {
+    align-content: center;    
+    width:100%;
+    height:100%;
+    position:absolute;
+}
+
+#name {
+    margin-bottom: 15px;
+    width: 300px;
+}
+
+#description {
+    margin-bottom: 7px;
+    width: 300px;
+}
+
+#admin {
+    width:300px;
+    margin-bottom:15px;
+}
+
+#create {
+    margin-left:10px;
+}

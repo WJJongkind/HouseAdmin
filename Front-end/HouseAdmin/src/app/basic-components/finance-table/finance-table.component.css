@@ -1,0 +1,54 @@
+#main {
+    align-content: center;
+}
+
+table, td, th {
+    table-layout: fixed;
+    font-family:verdana;
+    font-size:17px;
+    border: 2px solid #282828;
+    border-collapse:collapse;
+    text-align:start;
+    padding:6px;
+    color:#383838;
+}
+
+td, th {
+    background: #969696;
+    min-width:150px;
+    max-width:300px;
+}
+
+td {
+    cursor:pointer;
+}
+
+.title {
+    font-size: 22px;
+}
+
+.precontent {
+    border-bottom-width:4px;
+}
+
+.totals {
+    border-top-width:4px;
+    border-right-width:4px;
+}
+
+.smallIconButton {
+    width: 10px; 
+    height: 10px;
+}
+
+.invisible {
+    background-color:transparent;
+    border-color: transparent;
+    border-right-color: #282828;
+    width:10px;
+    min-width:10px;
+    max-width:10px;
+    margin-right:5px;
+    margin-left:0px;
+    cursor: auto;
+}

@@ -1,0 +1,11 @@
+#main {
+    font-family:verdana;
+    font-size:20px;
+    font-weight:bold;
+    color: #969696;
+    border-bottom-style: solid;
+    border-bottom-color: #969696;
+    border-bottom-width:1px;
+    margin-top:9px;
+    padding-bottom:9px;
+}

@@ -1,0 +1,7 @@
+<div id='main'>
+  <a [routerLink]="['', {outlets: { mainrouter: ['overview']}}]"><app-navpoint name='Main'></app-navpoint></a>
+  <a [routerLink]="['', {outlets: { mainrouter: ['registerexpenses']}}]"><app-navpoint name='Expenses'></app-navpoint></a>
+  <a [routerLink]="['', {outlets: { mainrouter: ['registerincome']}}]"><app-navpoint name="Income"></app-navpoint></a>
+  <a [routerLink]="['', {outlets: { primary: ['groups'], mainrouter: []}}]"><app-navpoint name="Groups"></app-navpoint></a>
+  <a (click)="logout()"><app-navpoint name='Logout'></app-navpoint></a>
+</div>

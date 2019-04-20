@@ -1,0 +1,32 @@
+<div class='maincontent' id='main'>
+  <table>
+    <tr>
+      <td>
+          Add new user:
+      </td>
+    </tr>
+    <td>
+      <input type="text" id="email" name="email">
+    </td>
+    <td id="addButton">
+      <button (click)="addMember()" id="add">Add</button>
+    </td>
+  </table>
+  <br>
+
+  <table class="members">
+    <tr class="members">
+      <th class="members" colspan>
+        User
+      </th>
+    </tr>
+    <tr *ngFor="let member of members" class="members">
+      <td class="members">
+        {{member}}
+      </td>
+      <td class="members" class="buttoncol">
+        <img (click)="delete(member)" src="../../../assets/DeleteDark.png" class="smallIconButton">
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,37 @@
+<div class='maincontent' id='main'>
+  <div id='tableholder'>
+    <div *ngIf="showRegistrationFailedError" class="error">
+      Your registration has failed. Please make sure that your email has not been regegistered yet, and it is correctly written.
+    </div>
+    <div *ngIf="showServerUnreachableError" class="error">
+      The server is currently unavailable. Please try again later.
+    </div>
+    <table>
+      <tr>
+        <td>
+          Email:
+        </td>
+        <td>
+          <input id='email' type='text'>
+        </td>
+      </tr>
+      <tr>
+          <td>
+            Username:
+          </td>
+          <td>
+            <input id='username' type='text'>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Password:
+          </td>
+          <td>
+            <input id='password' type='password'>
+          </td>
+        </tr>
+      </table>
+      <button id='register' (click)="register();">register</button>
+  </div>
+</div>

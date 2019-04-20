@@ -1,0 +1,25 @@
+router-outlet {
+    height:100%;
+    min-height: 100%;
+    height:auto !important;
+}
+
+.content {
+    display:table-cell;
+    padding:0px;
+    margin:0px;
+    vertical-align:top;
+}
+
+#sidebar {
+    height:100%;
+    min-height: 100%;
+    height:auto !important;
+    max-width:250px;
+    background-color: #282828;
+}
+
+#content {
+    margin-left:auto;
+    margin-right:auto;
+}

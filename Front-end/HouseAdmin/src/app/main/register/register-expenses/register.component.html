@@ -1,0 +1,117 @@
+<div class="maincontent">
+  <table>
+    <tr>
+      <td>
+        Amount spend:
+      </td>
+      <td>
+        <input type="text" id="amount"> EUR (<div class="eur">€</div>)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Category:
+      </td>
+      <td>
+        <select *ngIf="!newContent['newCategory']" id="category" (change)="updateTypes()">
+          <option id="categoryelement" *ngFor="let category of categoryTypeMapper.getCategories()">{{category}}</option>
+        </select>
+        <button *ngIf="!newContent['newCategory']" (click)="newButtonPressed('newCategory')" class="newButton">New</button>
+        <input *ngIf="newContent['newCategory']" type="text" id="category" placeholder="New value...">
+        <button *ngIf="newContent['newCategory']" (click)="cancelButtonPressed('newCategory')" class="newButton">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        type:
+      </td>
+      <td>
+        <select *ngIf="!newContent['newType']" id='type'>
+          <option id="typeelements" *ngFor="let type of knownTypes">{{type}}</option>
+        </select>
+        <button *ngIf="!newContent['newType']" (click)="newButtonPressed('newType')" class="newButton">New</button>
+        <input *ngIf="newContent['newType']" type="text" id="type" placeholder="New value...">
+        <button *ngIf="newContent['newType']" (click)="cancelButtonPressed('newType')" class="newButton">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Date: 
+      </td>
+      <td>
+        <input type="date" id="date" value="{{makeDateStringWrapper(prefilled.date)}}">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Comments:
+      </td>
+      <td>
+        <input id="comments" type="text">
+      </td>
+    </tr>
+    <tr class='submit'>
+      <td class='submit' colspan=2>
+        <button type='submit' id='submit' (click)="submit()">Submit</button>
+      </td>
+    </tr>
+  </table>
+  <table id="filters">
+    <tr class='top'>
+      <td class='top'>
+        Start date:
+      </td>
+      <td class='top'>
+        End date: 
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="date" id="startDateFilter" (change)="applyFilters()">
+      </td>
+      <td>
+        <input type="date" id="endDateFilter" (change)="applyFilters()">
+      </td>
+    </tr>
+    <tr class="top">
+      <td class="top">
+        Category:
+      </td>
+      <td class="top">
+        Type:
+      </td>
+      <td class="top">
+        Min. amount:
+      </td>
+      <td class="top">
+        Max. amount:
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <select id="categoryFilter" (change)="applyCategoryFilter()" value="">
+          <option value=""></option>
+          <option *ngFor="let category of categoryTypeMapper.getCategories()">{{category}}</option>
+        </select>
+      </td>
+      <td>
+        <select id="typeFilter" (change)="applyFilters()" value="">
+          <option value=""></option>
+          <option *ngFor="let type of knownTypesFilter">{{type}}</option>
+        </select>
+      </td>
+      <td>
+        <input type="text" id="minAmountFilter" (change)="applyFilters()">
+      </td>
+      <td>
+        <input type="text" id="maxAmountFilter" (change)="applyFilters()">
+      </td>
+    </tr>
+    <tr>
+      <td colspan=4>
+        <app-finance-table #overview name="Expenses" [data]="filteredData" [columns]="['date','category','type','amount', 'comments']" money="amount" (onEntryClick)="open($event)" (deleteEntryClick)="delete($event)">
+        </app-finance-table>
+      </td>
+    </tr>
+  </table>
+</div>
