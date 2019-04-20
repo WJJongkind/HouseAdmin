@@ -15,8 +15,7 @@ export class IncomeService {
   constructor(private http: HttpClient) { }
 
   obtainTransactions(groupID: string, completion: (response: IncomeEntry[]) => void, errorHandler: (error: any) => void) {    
-    let request = new BackendRequest(this.http, HttpMethod.get, new ArrayResponseParser(IncomeEntry));
-    request.targetAPI = this.targetAPI;
+    let request = new BackendRequest(this.http, HttpMethod.get, this.targetAPI, new ArrayResponseParser(IncomeEntry));
     request.setQueryParameter("ID", groupID);
     request.setQueryParameter("options", "1");
 
@@ -31,16 +30,14 @@ export class IncomeService {
       method = HttpMethod.patch
     }
 
-    let request = new BackendRequest(this.http, method, new ResponseParser(IncomeEntry));
-    request.targetAPI = this.targetAPI;
+    let request = new BackendRequest(this.http, method, this.targetAPI, new ResponseParser(IncomeEntry));
     request.body = income;
     
     request.performRequest(completion, errorHandler)
   }
 
   deleteIncome(income: IncomeEntry, completion: () => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.delete, new ResponseParser(EmptyResponse));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.delete, this.targetAPI, new ResponseParser(EmptyResponse));
     request.setQueryParameter("ID", income.id);
     
     request.performRequest((response: {}) => {

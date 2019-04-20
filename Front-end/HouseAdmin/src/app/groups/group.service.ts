@@ -17,8 +17,7 @@ export class GroupService {
   constructor(private http: HttpClient, private funcs: CFM) { }
 
   createGroup(name: string, description: string, completion: (response: Group) => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.post, new ResponseParser(Group));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.post, this.targetAPI, new ResponseParser(Group));
     request.body = new JSONWrapper({
       Name: name,
       Description: description,
@@ -28,16 +27,14 @@ export class GroupService {
   }
 
   getAllUserGroups(completion: (response: Group[]) => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.get, new ArrayResponseParser(Group));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.get, this.targetAPI, new ArrayResponseParser(Group));
     request.setQueryParameter("options", "1");
     
     request.performRequest(completion, errorHandler)
   }
 
   deleteGroup(id: string, completion: () => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.delete, new ResponseParser(EmptyResponse));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.delete, this.targetAPI, new ResponseParser(EmptyResponse));
     request.setQueryParameter("ID", id);
 
     request.performRequest(() => {
@@ -46,24 +43,21 @@ export class GroupService {
   }
 
   getGroup(id: string, completion: (group: Group) => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.get, new ResponseParser(Group));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.get, this.targetAPI, new ResponseParser(Group));
     request.setQueryParameter("ID", id);
 
     request.performRequest(completion, errorHandler);
   }
 
   updateGroup(group: Group, completion: (group: Group) => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.patch, new ResponseParser(Group));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.patch, this.targetAPI, new ResponseParser(Group));
     request.body = group
 
     request.performRequest(completion, errorHandler);
   }
 
   addGroupMember(email: string, groupId: string, completion: () => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.post, new ResponseParser(EmptyResponse));
-    request.targetAPI = this.managementAPI;
+    var request = new BackendRequest(this.http, HttpMethod.post, this.managementAPI, new ResponseParser(EmptyResponse));
     request.body = new JSONWrapper({
       Email: email,
       ID: groupId
@@ -75,10 +69,9 @@ export class GroupService {
   }
 
   deleteGroupMember(email: string, id: string, completion: () => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.delete, new ResponseParser(EmptyResponse));
+    var request = new BackendRequest(this.http, HttpMethod.delete, this.managementAPI, new ResponseParser(EmptyResponse));
     request.setQueryParameter("ID", id);
     request.setQueryParameter("Email", email);
-    request.targetAPI = this.managementAPI
 
     request.performRequest((response: {}) => {
       completion()

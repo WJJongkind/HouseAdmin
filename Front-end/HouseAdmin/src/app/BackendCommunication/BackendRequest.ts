@@ -1,8 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ResponseParser, Parser } from "./ResponseParser";
+import { Parser } from "./ResponseParser";
 import { JSONConvertable } from "./JSONConvertable";
 
+/**
+ * Supported methods for performing HTTP requests.
+ */
 export enum HttpMethod {
   get,
   post,
@@ -10,36 +13,37 @@ export enum HttpMethod {
   delete
 }
 
+/**
+ * Objects of this class represent backend requests that can be performed. It offers high-level functionality for communicating with the backend server. 
+ */
 export class BackendRequest<ResponseType> {
+
+  // MARK: - Constants
+
   private readonly $headers = "headers";
+
+  // MARK: - Private properties
+
   private _options: { withCredentials: boolean; headers: { [string: string]: string } };
-  private _body: JSONConvertable;
-  private _targetAPI: string;
-  private _queryParameters: { [string: string]: string };
+  private _body: JSONConvertable = null;
+  private _queryParameters: { [string: string]: string } = {};
   private static readonly BASE_URL = "http://localhost:8084/CowLiteCommunicationServer/HouseAdmin/"
 
-  constructor(private httpProvider: HttpClient, private _method: HttpMethod, private responseParser: Parser<ResponseType>) {
+  // MARK: - Object lifecycle
+
+  constructor(private httpProvider: HttpClient, private _method: HttpMethod, public targetAPI: string, private responseParser: Parser<ResponseType>) {
     this._options = {
       withCredentials: true,
       headers: {}
     };
-    this._queryParameters = {};
-    this._body = null;
-    this._targetAPI = null;
   }
 
-  /**
-   * Getter headers
-   * @return {{[string:string]: string}}
-   */
+  // MARK: - Getters & Setters
+
   public get headers(): { [string: string]: string } {
     return this._options[this.$headers];
   }
 
-  /**
-   * Setter headers
-   * @param {{[string:string]: string} value
-   */
   public set headers(value: { [string: string]: string }) {
     this._options[this.$headers] = value;
   }
@@ -64,62 +68,18 @@ export class BackendRequest<ResponseType> {
     }
   }
 
-  /**
-   * Getter targetAPI
-   * @return {string}
-   */
-  public get targetAPI(): string {
-    return this._targetAPI;
-  }
-
-  /**
-   * Setter targetAPI
-   * @param {string} value
-   */
-  public set targetAPI(value: string) {
-    this._targetAPI = value;
-  }
-
-  /**
-  * Getter queryParameters
-  * @return {{[string:string]: string}}
-  */
-  public get queryParameters(): { [string: string]: string } {
-    return this._queryParameters;
-  }
-
-  /**
-   * Setter queryParameters
-   * @param {{[string:string]: string}} value
-   */
-  public set queryParameters(value: { [key: string]: string }) {
-    for (let key in value) {
-      value[key] = this.filter(value[key]);
-    }
-
-    this._queryParameters = value;
-  }
-
   public setQueryParameter(key: string, value: string) {
-    this.queryParameters[key] = this.filter(value);
+    this._queryParameters[key] = value;
   }
 
   public getQueryParameter(key: string): string {
-    return this.queryParameters[key];
+    return this._queryParameters[key];
   }
 
-  /**
-  * Getter httpMethod
-  * @return {HttpMethod}
-  */
   public get httpMethod(): HttpMethod {
     return this._method;
   }
 
-  /**
-   * Setter httpMethod
-   * @param {HttpMethod} value
-   */
   public set httpMethod(value: HttpMethod) {
     this._method = value
 
@@ -127,19 +87,18 @@ export class BackendRequest<ResponseType> {
       case HttpMethod.delete, HttpMethod.get: {
         this.body = null
       }
-      case HttpMethod.get, HttpMethod.patch: {
-        if (this.body == null) {
-          this.body = null
-        }
-      }
     }
   }
 
-  private filter(value: string | String): string {
-    return value.replace(/\\/g, "\\\\");
-  }
+  // MARK: - Performing requests
 
-  public performRequest(responseCallback: (response: ResponseType) => void, errorCallback: (error: any) => void): void {
+  /**
+   * Performs the request with the options that have been set before calling this method. 
+   * 
+   * @param completion The closure which needs to be executed once the request is successful. If a parsed response object came back, this will be passed on to the completion handler.
+   * @param errorHandler The error handler for when an erroneous response code is returned by the server or when the request fails.
+   */
+  public performRequest(completion: (response: ResponseType) => void, errorHandler: (error: any) => void): void {
     if (this.targetAPI == null) {
       throw Error("API has not been set for backend request");
     }
@@ -150,17 +109,17 @@ export class BackendRequest<ResponseType> {
       throw Error("HTTP options are null for backend request");
     }
 
-    let observable = this.talkToBackend();
-      let subscription = observable.subscribe((response: ResponseType) => {
-        responseCallback(this.responseParser.parse(response));
-        subscription.unsubscribe();
-      }, (error: any) => {
-        errorCallback(error);
-        subscription.unsubscribe();
-      });
+    let observable = this.sendRequest();
+    let subscription = observable.subscribe((response: ResponseType) => {
+      completion(this.responseParser.parse(response));
+      subscription.unsubscribe();
+    }, (error: any) => {
+      errorHandler(error);
+      subscription.unsubscribe();
+    });
   }
 
-  private talkToBackend(): Observable<any> {
+  private sendRequest(): Observable<any> {
     var apiURL = BackendRequest.BASE_URL + this.targetAPI
 
     var query = this.createQuery();
@@ -187,11 +146,11 @@ export class BackendRequest<ResponseType> {
 
   private createQuery(): string {
     var query = "";
-    for (let key of Object.keys(this.queryParameters)) {
+    for (let key of Object.keys(this._queryParameters)) {
       if (query.length > 0) {
         query += "&";
       }
-      query += key + "=" + this.queryParameters[key];
+      query += key + "=" + this._queryParameters[key];
     }
 
     return query;

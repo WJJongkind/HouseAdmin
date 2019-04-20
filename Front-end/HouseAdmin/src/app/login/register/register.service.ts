@@ -14,8 +14,7 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   register(name: string, pw: string, email: string,completion: () => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.post, new ResponseParser(EmptyResponse));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.post, this.targetAPI, new ResponseParser(EmptyResponse));
     request.body = new JSONWrapper({
       username: name,
       password: pw,

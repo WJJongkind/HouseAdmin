@@ -17,8 +17,7 @@ export class LogoutService {
   constructor(private http: HttpClient) { }
 
   logout(sessionID: string, completion: () => void, errorHandler: (error: any) => void) {
-    let request = new BackendRequest(this.http, HttpMethod.post, new ResponseParser(EmptyResponse));
-    request.targetAPI = this.targetAPI;
+    let request = new BackendRequest(this.http, HttpMethod.post, this.targetAPI, new ResponseParser(EmptyResponse));
     request.body = new JSONWrapper({sessionID: sessionID});
     
     request.performRequest((response: {}) => {

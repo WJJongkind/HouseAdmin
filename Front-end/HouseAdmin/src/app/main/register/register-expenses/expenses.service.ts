@@ -15,8 +15,7 @@ export class ExpensesService {
   constructor(private http: HttpClient) { }
 
   obtainTransactions(groupID: string, completion: (expenses: Expense[]) => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.get, new ArrayResponseParser(Expense));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.get, this.targetAPI, new ArrayResponseParser(Expense));
     request.setQueryParameter("ID", groupID);
     request.setQueryParameter("options", "1");
 
@@ -31,16 +30,14 @@ export class ExpensesService {
       method = HttpMethod.patch
     }
 
-    let request = new BackendRequest(this.http, method, new ResponseParser(Expense));
-    request.targetAPI = this.targetAPI;
+    let request = new BackendRequest(this.http, method, this.targetAPI, new ResponseParser(Expense));
     request.body = expense;
     
     request.performRequest(completion, errorHandler);
   }
 
   deleteExpense(expense: Expense, completion: () => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.delete, new ResponseParser(EmptyResponse));
-    request.targetAPI = this.targetAPI;
+    var request = new BackendRequest(this.http, HttpMethod.delete, this.targetAPI, new ResponseParser(EmptyResponse));
     request.setQueryParameter("ID", expense.id);
     
     request.performRequest((response: {}) => {

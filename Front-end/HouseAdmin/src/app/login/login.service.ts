@@ -14,12 +14,11 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(name: string, pw: string, completion: (response: LoginResponse) => void, errorHandler: (error: any) => void) {
-    var request = new BackendRequest(this.http, HttpMethod.post, new ResponseParser(LoginResponse));
+    var request = new BackendRequest(this.http, HttpMethod.post, this.targetAPI, new ResponseParser(LoginResponse));
     request.body = new JSONWrapper({
       username: name,
       password: pw
     })
-    request.targetAPI = this.targetAPI;
     
     request.performRequest(completion, errorHandler)
   }
