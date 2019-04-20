@@ -1,5 +1,7 @@
 Back-end/CommunicationServer/dist
 Back-end/CommunicationServer/build
+Back-end/CommunicationServer/MailSettings.cfg
+Back-end/CommunicationServer/dbconfig.cfg
 Front-end/HouseAdmin/.vscode
 Front-end/HouseAdmin/dist
 Front-end/HouseAdmin/node_modules
