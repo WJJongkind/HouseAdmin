@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Parser } from "./ResponseParser";
+import { ObjectToTypescriptParser } from "./ResponseParser";
 import { JSONConvertable } from "./JSONConvertable";
 
 /**
@@ -31,7 +31,7 @@ export class BackendRequest<ResponseType> {
 
   // MARK: - Object lifecycle
 
-  constructor(private httpProvider: HttpClient, private _method: HttpMethod, public targetAPI: string, private responseParser: Parser<ResponseType>) {
+  constructor(private httpProvider: HttpClient, private _method: HttpMethod, public targetAPI: string, private responseParser: ObjectToTypescriptParser<ResponseType>) {
     this._options = {
       withCredentials: true,
       headers: {}
