@@ -1,0 +1,2 @@
+# HouseAdmin
+HouseAdmin is a web-app under construction, aimed at making financial administration easier and more insightful for the common person. Many people use Excel sheets for doing their financial administration, which is a painful and slow process. With HouseAdmin, this is all made much easier. Some key features that we aim to develop are importing CSV files with raw transactional data, generating reports, easy filtering through records and much more.
