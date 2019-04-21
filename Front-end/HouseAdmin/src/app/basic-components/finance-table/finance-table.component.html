@@ -3,7 +3,7 @@
     <tr>
       <td class="invisible"></td>
       <th class = 'title' [colSpan]="columns.length">
-        {{name}}
+        {{tableName}}
       </th>
     </tr>
     <tr class="precontent">
@@ -17,16 +17,16 @@
           <img src="../../../assets/DeleteLight.png" class="smallIconButton" (click)="delete(entry)">
       </td>
       <td *ngFor="let column of columns" (click)="open(entry)">
-        <span class="eur" *ngIf="column == money">€</span>
+        <span class="eur" *ngIf="column == moneyColumn">€</span>
         <span *ngIf="column == money">{{entry[column].toFixed(2)}}</span>
-        <span *ngIf="entry[column].constructor.name != 'Date' && column != money">{{entry[column]}}</span>
+        <span *ngIf="entry[column].constructor.name != 'Date' && column != moneyColumn">{{entry[column]}}</span>
         <span *ngIf="entry[column].constructor.name == 'Date'">{{makeDateString(entry[column])}}</span>
       </td>
     </tr>
     <tr class="totals">
       <td class="invisible"></td>
       <td *ngFor="let column of columns">
-        <div *ngIf="column == money"><div class="eur">€</div>{{calcTotalMoney()}}</div>
+        <div *ngIf="column == money"><div class="eur">€</div>{{calculateTotalMoneyAmount()}}</div>
         <div *ngIf="column == columns[0]">Total:</div> 
       </td>
     </tr>

@@ -87,7 +87,7 @@
     </tr>
     <tr>
       <td colspan=4>
-        <app-finance-table #overview name="Income" [data]="filteredData" [columns]="['date','category','amount', 'comments']" money="amount" (onEntryClick)="open($event)" (deleteEntryClick)="delete($event)">
+        <app-finance-table #overview tableName="Income" [data]="filteredData" [columns]="['date','category','amount', 'comments']" moneyColumn="amount" (onEntryClick)="open($event)" (deleteEntryClick)="delete($event)">
         </app-finance-table>
       </td>
     </tr>

@@ -7,26 +7,29 @@ import { CFM, SortMethod } from '../../common/common-functions.module';
   styleUrls: ['./finance-table.component.css']
 })
 
-export class FinanceTableComponent implements OnInit {
-  @Input() name;
-  @Input() columns: any[];
-  @Input() money;
-  @Output() onEntryClick = new EventEmitter<any>();
-  @Output() deleteEntryClick = new EventEmitter<any>();
+export class FinanceTableComponent {
 
-  sortedData: {}[] = [];
+  // MARK: - Inputs & outputs
+
+  @Input() tableName;
+  @Input() columns: any[];
+  @Input() moneyColumn;
   @Input() set data(data: {}[]) {
     if(data != undefined) {
       this.sortedData = data;
       CFM.sortJSONArrayByProperty(this.sortedData, 'date', SortMethod.descending);
     }
   }
+  @Output() onEntryClick = new EventEmitter<any>();
+  @Output() deleteEntryClick = new EventEmitter<any>();
 
-  constructor() {}
+  // MARK: - Public properties
 
-  ngOnInit() {}
+  sortedData: {}[] = [];
 
-  calcTotalMoney(): Number {
+  // MARK: - Public methods
+
+  calculateTotalMoneyAmount(): Number {
     var totalMoney = 0;
     this.sortedData.forEach((entry) => {
       totalMoney += entry['amount']
