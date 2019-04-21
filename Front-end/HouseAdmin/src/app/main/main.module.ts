@@ -8,6 +8,7 @@ import { OverviewModule } from './overview/overview.module';
 import { CookieService } from 'ngx-cookie-service';
 import { RegisterExpensesModule } from './register/register-expenses/register-expenses.module';
 import { RegisterIncomeModule } from './register/register-income/register-income.module';
+import { NavpointComponent } from './sidebar/navpoint/navpoint.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { RegisterIncomeModule } from './register/register-income/register-income
   ],
   declarations: [
     MainComponent, 
-    SidebarComponent
+    SidebarComponent,
+    NavpointComponent
   ],
   exports: [
     MainComponent,

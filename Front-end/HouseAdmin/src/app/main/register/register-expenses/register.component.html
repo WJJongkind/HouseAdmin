@@ -109,8 +109,8 @@
     </tr>
     <tr>
       <td colspan=4>
-        <app-finance-table #overview tableName="Expenses" [data]="filteredData" [columns]="['date','category','type','amount', 'comments']" moneyColumn="amount" (onEntryClick)="open($event)" (deleteEntryClick)="delete($event)">
-        </app-finance-table>
+        <finance-table #overview tableName="Expenses" [data]="filteredData" [columns]="['date','category','type','amount', 'comments']" moneyColumn="amount" (onEntryClick)="open($event)" (deleteEntryClick)="delete($event)">
+        </finance-table>
       </td>
     </tr>
   </table>

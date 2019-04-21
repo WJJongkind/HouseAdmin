@@ -1,12 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CFM, SortMethod } from '../../common/common-functions.module';
 
+/**
+ * The FinanceTableComponent is used to display financial data in a properly formatted data. Numbers are automatically rounded to two digits behind the comma, and the total
+ * sum of money that is displayed by the table is automatically calculated and displayed. It also offers functionality to notify observers when an entry has been clicked, or when
+ * the user pressed the delete-button for an entry.
+ */
 @Component({
-  selector: 'app-finance-table',
+  selector: 'finance-table',
   templateUrl: './finance-table.component.html',
   styleUrls: ['./finance-table.component.css']
 })
-
 export class FinanceTableComponent {
 
   // MARK: - Inputs & outputs
