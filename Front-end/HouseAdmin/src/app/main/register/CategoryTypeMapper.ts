@@ -1,33 +1,39 @@
 export class CategoryTypeMapper {
-    private mapped: {[category:string]:string[]} = {};
+    private mapped: Map<string, Set<string>>
 
     constructor(unmapped?: {category: string, type: string}[]) { 
         if(unmapped != undefined) {
-            this.mapped = {};
+            this.mapped = new Map();
     
             for(var i = 0; i < unmapped.length; i++) {
                 let mapping = unmapped[i];
-                this.addTypeToCategory(mapping.type, mapping.category);
+
+                if(this.mapped.has(mapping.category)) {
+                    this.mapped.get(mapping.category).add(mapping.type)
+                } else {
+                    let newMapping = new Set<string>()
+                    newMapping.add(mapping.type)
+                    this.mapped.set(mapping.category, newMapping)
+                }
             }
         }
     }
 
-    public addTypeToCategory(type: string, category: string) {
-        var categoryTypes = this.mapped[category];
+    public get types(): Set<string> {
+        var allTypes: string[] = []
 
-        if(categoryTypes == undefined) {
-            categoryTypes = [type];
-            this.mapped[category] = categoryTypes
-        } else if(categoryTypes.indexOf(type) == -1) {
-            categoryTypes.push(type);
-        }
+        this.mapped.forEach((types: Set<string>) => {
+            allTypes = allTypes.concat(Array.from(types))
+        });
+
+        return new Set(allTypes)
     }
 
-    public getCategories(): string[] {
-        return Object.keys(this.mapped);
+    public get categories(): Set<string> {
+        return this.mapped != undefined ? new Set(this.mapped.keys()) : new Set()
     }
     
-    public getTypesForCategory(category: string): string[] {
-        return this.mapped[category];
+    public getTypesForCategory(category: string): Set<string> {
+        return this.mapped.get(category);
     }
 }

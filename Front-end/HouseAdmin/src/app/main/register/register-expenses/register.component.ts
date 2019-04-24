@@ -13,8 +13,8 @@ import { Filter, FilterType } from '../../../common/Filter';
 export class RegisterExpensesComponent implements OnInit, AfterViewInit {
   // Prefill/default values
   prefilled: Expense
-  knownTypes: string[] = []
-  knownTypesFilter: string[] = []
+  knownTypes: Set<string> = new Set() // For creating a new entry
+  knownTypesFilter: Set<string> = new Set() // For filtering the table with types that match
 
   // Filters
   start;
@@ -38,12 +38,14 @@ export class RegisterExpensesComponent implements OnInit, AfterViewInit {
 
     this.serv.obtainTransactions(this.tool.getActivatedGroup(), (entries: Expense[]) => {
       this.data = entries;
-      this.refreshCategoryTypes();
+      this.refreshCategoryTypes()
+      this.knownTypesFilter = this.categoryTypeMapper.types
       this.applyFilters()
     }, (error: any) => {
       // TODO proper error handling
     });
   }
+
   ngAfterViewInit() {
     CFM.linkKeyEventOnInputToAction("comments", KeyEvents.keyUp, KeyEventKeys.enter, () => {
       this.submit()
@@ -65,10 +67,10 @@ export class RegisterExpensesComponent implements OnInit, AfterViewInit {
   updateTypes() {
     let category = CFM.getElementByIDValue("category");
     
-    if((category != undefined && category != "") || this.categoryTypeMapper.getTypesForCategory(category) == []) {
+    if((category != undefined && category != "")) {
       this.knownTypes = this.categoryTypeMapper.getTypesForCategory(category);
     } else {
-      let selectedCategory = this.categoryTypeMapper.getCategories()[0]
+      let selectedCategory = this.categoryTypeMapper.categories[0]
       this.knownTypes = this.categoryTypeMapper.getTypesForCategory(selectedCategory)
       CFM.getElementByID("category").value = selectedCategory
     }
@@ -133,7 +135,9 @@ export class RegisterExpensesComponent implements OnInit, AfterViewInit {
   }
 
   applyCategoryFilter() {
-    this.knownTypesFilter = this.categoryTypeMapper.getTypesForCategory(CFM.getElementByIDValue("categoryFilter"))
+    let category = CFM.getElementByIDValue("categoryFilter")
+    this.knownTypesFilter = category == "" ? this.categoryTypeMapper.types : this.categoryTypeMapper.getTypesForCategory(category)
+
     this.applyFilters()
   }
 
