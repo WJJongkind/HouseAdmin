@@ -28,9 +28,6 @@ export class RegisterExpensesComponent implements OnInit, AfterViewInit {
   // Reference HTML when making new category/type
   public newContent: {[string:string]:boolean} = {};
 
-  // @ViewChild("overview") overviewTable;
-  // @ViewChild("category") categoryInput;
-
   constructor(private serv: ExpensesService, private tool: CFM) { }
 
   ngOnInit() {

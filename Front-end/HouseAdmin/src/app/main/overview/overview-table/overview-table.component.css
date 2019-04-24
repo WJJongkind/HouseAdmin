@@ -9,9 +9,13 @@ table, tr, td, th {
     background: #969696
 }
 
+table {
+    min-width: 100%;
+    width: 100%;
+}
+
 td, th {
     min-width:150px;
-    width:100%;
 }
 
 #totals {
