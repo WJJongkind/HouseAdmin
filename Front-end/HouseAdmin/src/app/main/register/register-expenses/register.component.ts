@@ -70,7 +70,7 @@ export class RegisterExpensesComponent implements OnInit, AfterViewInit {
     if((category != undefined && category != "")) {
       this.knownTypes = this.categoryTypeMapper.getTypesForCategory(category);
     } else {
-      let selectedCategory = this.categoryTypeMapper.categories[0]
+      let selectedCategory = this.categoryTypeMapper.categories.values().next().value
       this.knownTypes = this.categoryTypeMapper.getTypesForCategory(selectedCategory)
       CFM.getElementByID("category").value = selectedCategory
     }
