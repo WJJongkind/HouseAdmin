@@ -12,17 +12,17 @@ import org.json.JSONObject;
  * @author Wessel
  */
 public class JSONStatusResponse {
-    public static String success() {
-        return "{\"success\": true}";
-    }
-    
-    public static String success(JSONObject data) {
-        return "{\"success\": true, \"data\": " + data.toString() + "}";
-    }
-    
-    public static String success(String key, String value) {
-        return "{\"success\": true, \"data\":{\"" + key + "\": \"" + value + "\"}}";
-    }
+//    public static String success() {
+//        return "{\"success\": true}";
+//    }
+//    
+//    public static String success(JSONObject data) {
+//        return "{\"success\": true, \"data\": " + data.toString() + "}";
+//    }
+//    
+//    public static String success(String key, String value) {
+//        return "{\"success\": true, \"data\":{\"" + key + "\": \"" + value + "\"}}";
+//    }
     
     public static String failure() {
         return "{\"success\": false}";

@@ -50,7 +50,7 @@ public class LoginServlet extends BaseServlet {
                 SessionManager manager = new SessionManager();
                 String sessionID = manager.addSession(request, response, user);
 
-                out.println(JSONStatusResponse.success("id", sessionID));
+                out.println("{\"id\": \"" + sessionID + "\"}");
             } else {
                 out.println(JSONStatusResponse.failure());
             }

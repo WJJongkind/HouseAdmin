@@ -35,7 +35,7 @@ public class ActivationServlet extends BaseServlet
             user.update();
             
             out = response.getWriter();
-            out.print(JSONStatusResponse.success());
+            out.print("{}");
         }catch(Exception e){
             out = response.getWriter();
             out.print(JSONStatusResponse.failure());

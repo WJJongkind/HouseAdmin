@@ -98,7 +98,7 @@ public class GroupsServlet extends BaseServlet {
                 user.getGroups().add(group.getId());
                 user.update();
                 
-                out.println(JSONStatusResponse.success("ID", group.getId()));
+                out.println(group.constructJSONMessage());
             }
         }.respond();
     }
@@ -118,7 +118,7 @@ public class GroupsServlet extends BaseServlet {
                 if(group.getAdmin().equals(user.getEmail())) {
                     new Group(groupID).delete();
                     user.getGroups().remove(groupID);
-                    out.println(JSONStatusResponse.success());
+                    out.println("{}");
                 } else {
                     response.sendError(HttpServletResponse.SC_FORBIDDEN);
                     out.println(JSONStatusResponse.failure());
@@ -145,7 +145,7 @@ public class GroupsServlet extends BaseServlet {
                     group.setDescription(obj.getString(Groups.DESCRIPTION));
                     group.setAdmin(obj.getString(Groups.ADMIN));
                     group.update();
-                    out.println(JSONStatusResponse.success());
+                    out.println(group.constructJSONMessage());
                 } else {
                     response.sendError(HttpServletResponse.SC_FORBIDDEN);
                     out.println(JSONStatusResponse.failure());

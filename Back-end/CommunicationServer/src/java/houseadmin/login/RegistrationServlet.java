@@ -44,7 +44,7 @@ public class RegistrationServlet extends BaseServlet {
             } else {
                 user.create();
                 sendConfirmationMail(user, request);
-                out.print(JSONStatusResponse.success());
+                out.print("{}");
             }
         } catch (Exception e) {
             e.printStackTrace();

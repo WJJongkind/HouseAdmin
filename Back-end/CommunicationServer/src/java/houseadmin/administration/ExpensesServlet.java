@@ -106,7 +106,7 @@ public class ExpensesServlet extends BaseServlet {
                     } else {
                         entry.update();
                     }
-                    out.print(JSONStatusResponse.success("ID", entry.getId()));
+                    out.print(entry.constructJSONMessage());
                 } else {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 }
@@ -128,10 +128,10 @@ public class ExpensesServlet extends BaseServlet {
                 
                 if(group.getMembers().contains(user.getEmail())) {
                     entry.delete();
-                    out.println(JSONStatusResponse.success());
+                    out.println("{}");
                 } else {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                    out.println(JSONStatusResponse.success());
+                    out.println(JSONStatusResponse.failure());
                 }
                 
             }

@@ -77,7 +77,7 @@ public class GroupManagementServlet extends BaseServlet {
                     }
                 }
                 
-                out.println(JSONStatusResponse.success());
+                out.println("{}");
             }
         }.respond();
     }
@@ -103,7 +103,7 @@ public class GroupManagementServlet extends BaseServlet {
                     group.update();
                     user.getGroups().remove(groupID);
                     user.update();
-                    out.println(JSONStatusResponse.success());
+                    out.println("{}");
                 } else {
                     response.sendError(HttpServletResponse.SC_FORBIDDEN);
                     out.println(JSONStatusResponse.failure());

@@ -106,7 +106,7 @@ public class IncomeServlet extends BaseServlet {
                     } else {
                         entry.update();
                     }
-                    out.print(JSONStatusResponse.success("id", entry.getId()));
+                    out.print(entry.constructJSONMessage());
                 } else {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     out.println(JSONStatusResponse.failure());
@@ -129,7 +129,7 @@ public class IncomeServlet extends BaseServlet {
                 
                 if(group.getMembers().contains(user.getEmail())) {
                     entry.delete();
-                    out.println(JSONStatusResponse.success());
+                    out.println("{}");
                 } else {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     out.println(JSONStatusResponse.failure());

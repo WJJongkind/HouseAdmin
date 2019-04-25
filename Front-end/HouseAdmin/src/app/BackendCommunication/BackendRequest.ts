@@ -27,7 +27,7 @@ export class BackendRequest<ResponseType> {
   private _options: { withCredentials: boolean; headers: { [string: string]: string } };
   private _body: JSONConvertable = null;
   private _queryParameters: { [string: string]: string } = {};
-  private static readonly BASE_URL = "http://192.168.178.69:6969/CowLiteCommunicationServer/HouseAdmin/"
+  private static readonly BASE_URL = "http://localhost:8084/CowLiteCommunicationServer/HouseAdmin/"
 
   // MARK: - Object lifecycle
 
