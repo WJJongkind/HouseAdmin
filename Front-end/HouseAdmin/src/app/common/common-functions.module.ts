@@ -152,7 +152,7 @@ export class CFM {
    * @param array The array from which the object has to be removed.
    * @param obj The object that needs to be removed.
    */
-  public static deleteFromArray<T>(array: [T], obj: T): [T] {
+  public static deleteFromArray<T>(array: T[], obj: T): T[] {
     let index = array.indexOf(obj);
 
     if(index > -1) {

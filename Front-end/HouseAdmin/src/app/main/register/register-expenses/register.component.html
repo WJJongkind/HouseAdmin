@@ -5,7 +5,8 @@
         Amount spend:
       </td>
       <td>
-        <input type="text" id="amount"> EUR (<div class="eur">€</div>)
+        <input *ngIf="prefilled.id == null" type="text" id="amount">
+        <input *ngIf="prefilled.id != null" value="{{prefilled.amount}}" type="text" id="amount"> EUR (<div class="eur">€</div>)
       </td>
     </tr>
     <tr>
@@ -13,7 +14,10 @@
         Category:
       </td>
       <td>
-        <select *ngIf="!newContent['newCategory']" id="category" (change)="updateTypes()">
+        <select *ngIf="!newContent['newCategory'] && prefilled.id == null" id="category" (change)="updateTypes()">
+          <option id="categoryelement" *ngFor="let category of categoryTypeMapper.categories">{{category}}</option>
+        </select>
+        <select *ngIf="!newContent['newCategory'] && prefilled.id != null" value="{{prefilled.category}}" id="category" (change)="updateTypes()">
           <option id="categoryelement" *ngFor="let category of categoryTypeMapper.categories">{{category}}</option>
         </select>
         <button *ngIf="!newContent['newCategory']" (click)="newButtonPressed('newCategory')" class="newButton">New</button>
@@ -26,7 +30,10 @@
         type:
       </td>
       <td>
-        <select *ngIf="!newContent['newType']" id='type'>
+        <select *ngIf="!newContent['newType'] && prefilled.id == null" id='type'>
+          <option id="typeelements" *ngFor="let type of knownTypes">{{type}}</option>
+        </select>
+        <select *ngIf="!newContent['newType'] && prefilled.id != null" id='type' value="{{prefilled.type}}">
           <option id="typeelements" *ngFor="let type of knownTypes">{{type}}</option>
         </select>
         <button *ngIf="!newContent['newType']" (click)="newButtonPressed('newType')" class="newButton">New</button>
@@ -39,7 +46,8 @@
         Date: 
       </td>
       <td>
-        <input type="date" id="date" value="{{makeDateStringWrapper(prefilled.date)}}">
+        <input *ngIf="prefilled.id == null" type="date" id="date" value="{{makeDateStringWrapper(prefilled.date)}}">
+        <input *ngIf="prefilled.id != null" value="{{makeDateStringWrapper(prefilled.date)}}" type="date" id="date" value="{{makeDateStringWrapper(prefilled.date)}}">
       </td>
     </tr>
     <tr>
@@ -47,7 +55,8 @@
         Comments:
       </td>
       <td>
-        <input id="comments" type="text">
+        <input *ngIf="prefilled.id == null" id="comments" type="text">
+        <input *ngIf="prefilled.id != null" value="{{prefilled.comments}}" id="comments" type="text">
       </td>
     </tr>
     <tr class='submit'>

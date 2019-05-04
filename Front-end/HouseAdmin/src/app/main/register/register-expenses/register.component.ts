@@ -11,22 +11,22 @@ import { Filter, FilterType } from '../../../common/Filter';
   styleUrls: ['./register.component.css']
 })
 export class RegisterExpensesComponent implements OnInit, AfterViewInit {
-  // Prefill/default values
+
+  // MARK: - Public types
+
+  public categoryTypeMapper = new CategoryTypeMapper(undefined);
+  public newContent: {[string:string]:boolean} = {};
+
+  // MARK: - Private types
+
   prefilled: Expense
   knownTypes: Set<string> = new Set() // For creating a new entry
   knownTypesFilter: Set<string> = new Set() // For filtering the table with types that match
-
-  // Filters
   start;
   end;
-
-  // Data & derived values
   data: Expense[]
   filteredData: Expense[]
-  public categoryTypeMapper = new CategoryTypeMapper(undefined);
-
-  // Reference HTML when making new category/type
-  public newContent: {[string:string]:boolean} = {};
+  previouslySelectedCategory: string
 
   constructor(private serv: ExpensesService, private tool: CFM) { }
 
@@ -61,14 +61,19 @@ export class RegisterExpensesComponent implements OnInit, AfterViewInit {
     }
 
     this.categoryTypeMapper = new CategoryTypeMapper(dict)
-    this.updateTypes()
+    this.updateTypes(undefined)
   }
   
-  updateTypes() {
-    let category = CFM.getElementByIDValue("category");
+  updateTypes(newCategory: string) {
+    let category = newCategory == null ? CFM.getElementByIDValue("category") : newCategory
     
-    if((category != undefined && category != "")) {
-      this.knownTypes = this.categoryTypeMapper.getTypesForCategory(category);
+    if(category == this.previouslySelectedCategory) {
+      return
+    }
+    this.previouslySelectedCategory = category
+    
+    if((category != null && category != "")) {
+      this.knownTypes = this.categoryTypeMapper.getTypesForCategory(category)
     } else {
       let selectedCategory = this.categoryTypeMapper.categories.values().next().value
       this.knownTypes = this.categoryTypeMapper.getTypesForCategory(selectedCategory)
@@ -78,12 +83,7 @@ export class RegisterExpensesComponent implements OnInit, AfterViewInit {
 
   open(entry: Expense) {
     this.prefilled = entry;
-    CFM.getElementByID("date").value = CFM.makeDateString(entry.date);
-    CFM.getElementByID("amount").value = "" + entry.amount;
-    CFM.getElementByID("category").value = entry.category;
-    this.updateTypes() // Required in order to prefill the "type" field
-    CFM.getElementByID("type").value = entry.type;
-    CFM.getElementByID("comments").value = entry.comments;
+    this.updateTypes(entry.category)
   }
 
   delete(entry: Expense) {
