@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Wessel Jongkind
  * @version 11-10-2017
  */
-@WebServlet(name = "logoutservlet", urlPatterns = {"/HouseAdmin/logoutservlet", "/HouseAdmin/Logoutservlet", "/HouseAdmin/LogoutServlet"})
+@WebServlet(name = "logoutservlet", urlPatterns = {"/HouseAdmin/logout"})
 public class LogoutServlet extends BaseServlet
 {
     @Override

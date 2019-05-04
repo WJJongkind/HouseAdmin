@@ -67,7 +67,7 @@ public class IncomeEntry extends DBAO implements JSON {
         this.groupID = obj.getString("groupID");
 
         try {
-            this.id = obj.getString("ID");
+            this.id = obj.getString("id");
         } catch (Exception e) {
         }
     }

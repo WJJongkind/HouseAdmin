@@ -12,7 +12,7 @@ import { JSONWrapper } from '../BackendCommunication/JSONConvertable';
 })
 export class LogoutService {
 
-  private readonly targetAPI = "logout.json"
+  private readonly targetAPI = "logout"
 
   constructor(private http: HttpClient) { }
 
